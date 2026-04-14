@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Homeway Mortgages — Own Dubai. Live Global.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0a1628;
+  --navy2:#0f1e38;
+  --navy3:#162340;
+  --gold:#c9a84c;
+  --gold2:#e8c96e;
+  --gold3:#f5dfa0;
+  --cream:#f9f5ee;
+  --cream2:#f2ead8;
+  --white:#ffffff;
+  --text:#1a1a2e;
+  --muted:#8a9ab5;
+  --r:0.75rem;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 5%;display:flex;align-items:center;justify-content:space-between;transition:background .4s,backdrop-filter .4s;animation:navSlideDown .75s cubic-bezier(.22,1,.36,1) both;}
+nav.scrolled{background:rgba(10,22,40,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.15);}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--gold2);letter-spacing:1px;text-decoration:none;}
+.logo span{color:var(--white);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.875rem;font-weight:400;letter-spacing:.3px;transition:color .2s;}
+.nav-links a:hover{color:var(--gold2);}
+.nav-cta{background:var(--gold);color:var(--navy);padding:.55rem 1.4rem;border-radius:2rem;font-size:.875rem;font-weight:500;text-decoration:none;transition:background .2s,transform .2s;}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--gold2);border-radius:2px;transition:all .3s;}
+.mobile-menu{display:flex;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .4s ease,visibility .4s;}
+.mobile-menu.open{opacity:1;visibility:visible;pointer-events:auto;}
+.mobile-menu a{opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease,color .2s;}
+.mobile-menu.open a{opacity:1;transform:translateY(0);}
+.mobile-menu.open a:nth-of-type(1){transition-delay:.08s;}
+.mobile-menu.open a:nth-of-type(2){transition-delay:.12s;}
+.mobile-menu.open a:nth-of-type(3){transition-delay:.16s;}
+.mobile-menu.open a:nth-of-type(4){transition-delay:.2s;}
+.mobile-menu.open a:nth-of-type(5){transition-delay:.24s;}
+.mobile-menu.open a:nth-of-type(6){transition-delay:.28s;}
+.mobile-menu.open a:nth-of-type(7){transition-delay:.32s;}
+.mobile-menu a{color:var(--white);font-size:1.5rem;text-decoration:none;font-family:'Cormorant Garamond',serif;font-weight:400;}
+.mobile-menu a:hover{color:var(--gold2);}
+.close-menu{position:absolute;top:1.5rem;right:5%;font-size:1.8rem;cursor:pointer;color:var(--gold2);}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 55% 45% at 65% 35%,rgba(201,168,76,.09) 0%,transparent 58%);animation:heroGlowPulse 14s ease-in-out infinite;}
+.hero-bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse 80% 60% at 60% 40%,rgba(201,168,76,.08) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 50% at 20% 80%,rgba(201,168,76,.05) 0%,transparent 50%),
+  linear-gradient(135deg,#0a1628 0%,#0d1c35 40%,#0a1628 100%);animation:heroBgShift 22s ease-in-out infinite alternate;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:80px 80px;background-position:0 0;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black,transparent);animation:gridDrift 50s linear infinite;}
+.hero-content{position:relative;z-index:2;padding:8rem 5% 4rem;max-width:700px;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);color:var(--gold3);font-size:.78rem;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:.4rem 1rem;border-radius:2rem;margin-bottom:1.5rem;animation:fadeUp .8s .1s both;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:300;line-height:1.1;margin-bottom:1.5rem;animation:fadeUp .8s .25s both;}
+.hero h1 em{font-style:italic;color:var(--gold2);}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,.7);line-height:1.75;max-width:520px;margin-bottom:2.5rem;font-weight:300;animation:fadeUp .8s .4s both;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .55s both;}
+.btn-primary{background:var(--gold);color:var(--navy);padding:.85rem 2rem;border-radius:2rem;font-weight:500;text-decoration:none;transition:all .25s;font-size:.95rem;}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 30px rgba(201,168,76,.25);}
+.btn-outline{border:1px solid rgba(201,168,76,.4);color:var(--gold3);padding:.85rem 2rem;border-radius:2rem;font-weight:400;text-decoration:none;transition:all .25s;font-size:.95rem;}
+.btn-outline:hover{border-color:var(--gold2);color:var(--gold2);background:rgba(201,168,76,.07);}
+.hero-stats{display:flex;flex-wrap:wrap;gap:1.25rem;margin-top:2.5rem;width:100%;justify-content:flex-start;}
+.stat-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.15);border-radius:var(--r);padding:1rem 1.5rem;backdrop-filter:blur(8px);text-align:center;animation:fadeUp .75s cubic-bezier(.22,1,.36,1) both;transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;}
+.stat-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.35);box-shadow:0 12px 40px rgba(0,0,0,.25);}
+.stat-card:nth-child(1){animation-delay:.65s;}
+.stat-card:nth-child(2){animation-delay:.78s;}
+.stat-card:nth-child(3){animation-delay:.91s;}
+.stat-card:nth-child(4){animation-delay:1.04s;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--gold2);}
+.stat-label{font-size:.75rem;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-top:.2rem;}
+.scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:fadeUp .8s .9s both;z-index:2;}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold2),transparent);animation:scrollPulse 2s infinite;}
+.scroll-text{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+
+/* DUBAI SECTION */
+.section{padding:6rem 5%;}
+.section-label{display:inline-block;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);margin-bottom:1rem;font-weight:500;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;line-height:1.2;margin-bottom:1.5rem;}
+.section-title em{font-style:italic;color:var(--gold2);}
+.section-body{color:rgba(255,255,255,.65);line-height:1.85;font-size:1rem;max-width:600px;}
+
+.dubai-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.dubai-visual{position:relative;}
+.dubai-skyline{width:100%;aspect-ratio:4/3;background:linear-gradient(180deg,#0a1628 0%,#0d1c35 50%,#0a1628 100%);border-radius:1.2rem;border:1px solid rgba(201,168,76,.15);overflow:hidden;position:relative;animation:skylineFloat 9s ease-in-out infinite;}
+.dubai-skyline svg{width:100%;height:100%;}
+.dubai-float-card{position:absolute;bottom:-1.5rem;right:-1.5rem;background:rgba(10,22,40,.95);border:1px solid rgba(201,168,76,.2);border-radius:var(--r);padding:1.2rem 1.5rem;backdrop-filter:blur(10px);animation:floatY 5s ease-in-out infinite;}
+.float-icon{font-size:1.5rem;margin-bottom:.4rem;}
+.float-title{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.float-val{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--gold2);}
+
+/* HOW IT WORKS */
+.how-bg{background:var(--navy2);}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem;}
+.step-card{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.1);border-radius:1rem;padding:2rem 1.5rem;transition:all .3s;position:relative;overflow:hidden;}
+.step-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.05),transparent);opacity:0;transition:opacity .3s;}
+.step-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-4px);}
+.step-card:hover::before{opacity:1;}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:rgba(201,168,76,.2);line-height:1;margin-bottom:.8rem;}
+.step-icon{width:44px;height:44px;border-radius:50%;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.1rem;}
+.step-title{font-weight:500;font-size:1rem;margin-bottom:.6rem;color:var(--white);}
+.step-desc{font-size:.875rem;color:var(--muted);line-height:1.7;}
+
+/* INVEST MODEL */
+.invest-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.invest-feature{display:flex;gap:1rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.invest-feature:last-child{border-bottom:none;}
+.invest-icon{width:48px;height:48px;min-width:48px;border-radius:.6rem;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.invest-feature h3{font-weight:500;font-size:1rem;margin-bottom:.4rem;}
+.invest-feature p{font-size:.875rem;color:var(--muted);line-height:1.65;}
+
+.calc-card{background:var(--navy2);border:1px solid rgba(201,168,76,.18);border-radius:1.2rem;padding:2.5rem;position:sticky;top:7rem;transition:box-shadow .4s ease,border-color .4s ease;}
+.calc-card.reveal.visible{animation:calcCardIn .9s cubic-bezier(.22,1,.36,1) both;}
+#emiVal,#rentVal,#surplusVal{transition:color .35s ease,transform .25s ease;}
+.calc-updated-pulse{animation:numPulse .5s cubic-bezier(.22,1,.36,1);}
+.calc-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:1.5rem;color:var(--gold2);}
+.calc-label{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem;}
+.calc-row{margin-bottom:1.5rem;}
+.calc-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.5rem;padding:.7rem 1rem;color:var(--white);font-size:.95rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.calc-input:focus{border-color:rgba(201,168,76,.4);}
+.calc-result{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:.75rem;padding:1.5rem;margin-top:1.5rem;}
+.calc-result-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem;}
+.calc-result-val{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--gold2);}
+.calc-result-sub{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.3rem;}
+.range-input{width:100%;accent-color:var(--gold);height:4px;cursor:pointer;}
+
+/* PROPERTIES */
+.prop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.prop-card{background:var(--navy2);border:1px solid rgba(201,168,76,.1);border-radius:1.2rem;overflow:hidden;transition:all .3s;cursor:pointer;}
+.prop-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.3);box-shadow:0 20px 50px rgba(0,0,0,.4);}
+.prop-img{width:100%;aspect-ratio:16/10;position:relative;overflow:hidden;}
+.prop-img-inner{width:100%;height:100%;transition:transform .5s;}
+.prop-card:hover .prop-img-inner{transform:scale(1.06);}
+.prop-tag{position:absolute;top:.8rem;left:.8rem;background:rgba(201,168,76,.9);color:var(--navy);font-size:.7rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:.25rem .7rem;border-radius:2rem;}
+.prop-body{padding:1.4rem;}
+.prop-loc{font-size:.75rem;color:var(--gold2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.3rem;}
+.prop-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;margin-bottom:.8rem;}
+.prop-specs{display:flex;gap:1.2rem;font-size:.8rem;color:var(--muted);margin-bottom:1rem;}
+.prop-price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold2);font-weight:600;}
+.prop-price span{font-size:.85rem;font-weight:400;color:var(--muted);}
+.prop-monthly{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.2rem;}
+
+/* TESTIMONIALS */
+.testi-bg{background:linear-gradient(135deg,var(--navy2),var(--navy));}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.testi-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:1rem;padding:2rem;transition:border-color .3s;}
+.testi-card:hover{border-color:rgba(201,168,76,.2);}
+.testi-stars{color:var(--gold2);font-size:.9rem;margin-bottom:1rem;letter-spacing:2px;}
+.testi-text{font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.75;font-style:italic;margin-bottom:1.5rem;}
+.testi-author{display:flex;align-items:center;gap:.8rem;}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.85rem;color:var(--navy);}
+.testi-name{font-weight:500;font-size:.9rem;}
+.testi-country{font-size:.75rem;color:var(--muted);}
+
+/* COUNTRIES */
+.countries-grid{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:2rem;}
+.country-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2rem;padding:.5rem 1.2rem;font-size:.875rem;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:.5rem;transition:all .25s;cursor:default;}
+.country-pill:hover{border-color:rgba(201,168,76,.3);color:var(--gold3);}
+.country-flag{font-size:1rem;}
+
+/* FAQ */
+.faq-list{max-width:760px;margin:3rem auto 0;}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.07);overflow:hidden;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 0;cursor:pointer;font-size:1rem;font-weight:400;color:var(--white);transition:color .2s;}
+.faq-q:hover{color:var(--gold2);}
+.faq-icon{width:24px;height:24px;border:1px solid rgba(201,168,76,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--gold2);transition:transform .3s,background .2s;flex-shrink:0;}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:rgba(201,168,76,.1);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.faq-item.open .faq-a{max-height:300px;}
+.faq-a-inner{padding:0 0 1.4rem;color:var(--muted);font-size:.9rem;line-height:1.8;}
+
+/* CTA SECTION */
+.cta-section{text-align:center;padding:7rem 5%;background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(201,168,76,.07),transparent);}
+.cta-section .section-title{max-width:600px;margin:0 auto 1.5rem;}
+.cta-section p{color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 2.5rem;font-size:1rem;line-height:1.75;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+/* ─── WHATSAPP FAB ─── */
+#wa-fab{position:fixed;bottom:2rem;right:2rem;z-index:900;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);animation:waPop .6s 2s both,waFloat 3s 2.6s ease-in-out infinite;cursor:pointer;transition:transform .2s;}
+#wa-fab:hover{transform:scale(1.1);}
+#wa-fab svg{width:28px;height:28px;fill:white;}
+@keyframes waPop{from{opacity:0;transform:scale(0);}to{opacity:1;transform:scale(1);}}
+@keyframes waFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+#wa-tooltip{position:fixed;bottom:5.5rem;right:2rem;z-index:900;background:var(--card2);border:1px solid rgba(37,211,102,.3);border-radius:10px;padding:.6rem 1rem;font-size:.8rem;color:var(--white);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;}
+#wa-fab:hover + #wa-tooltip{opacity:1;}
+/* FOOTER */
+footer{background:var(--navy);border-top:1px solid rgba(201,168,76,.1);padding:4rem 5% 2rem;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold2);margin-bottom:1rem;}
+.footer-tagline{font-size:.875rem;color:var(--muted);line-height:1.7;max-width:240px;}
+.footer-heading{font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--gold2);margin-bottom:1rem;font-weight:500;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s;}
+.footer-links a:hover{color:var(--gold2);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted);}
+.footer-rera{display:inline-flex;align-items:center;gap:.5rem;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:.4rem;padding:.3rem .8rem;font-size:.75rem;color:var(--gold3);}
+
+/* TRUST BAR */
+.trust-bar{background:rgba(201,168,76,.06);border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);padding:1.2rem 5%;}
+.trust-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:rgba(255,255,255,.6);}
+.trust-dot{width:6px;height:6px;border-radius:50%;background:var(--gold2);animation:trustDotPulse 2.4s ease-in-out infinite;}
+.trust-item:nth-child(2) .trust-dot{animation-delay:.3s;}
+.trust-item:nth-child(3) .trust-dot{animation-delay:.6s;}
+.trust-item:nth-child(4) .trust-dot{animation-delay:.9s;}
+.trust-item:nth-child(5) .trust-dot{animation-delay:1.2s;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scrollPulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+@keyframes navSlideDown{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes heroGlowPulse{0%,100%{opacity:.55;transform:scale(1);}50%{opacity:1;transform:scale(1.03);}}
+@keyframes heroBgShift{0%{filter:brightness(1);}100%{filter:brightness(1.06);}}
+@keyframes gridDrift{to{background-position:80px 80px;}}
+@keyframes skylineFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes calcCardIn{from{opacity:0;transform:translateY(20px) scale(.985);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes numPulse{0%{transform:scale(1);}40%{transform:scale(1.04);}100%{transform:scale(1);}}
+@keyframes trustDotPulse{0%,100%{opacity:.45;box-shadow:0 0 0 0 rgba(201,168,76,.35);}50%{opacity:1;box-shadow:0 0 12px 1px rgba(201,168,76,.25);}}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* Staggered children when container scrolls into view */
+.reveal.reveal-stagger{opacity:1;transform:none;transition:none;}
+.reveal.reveal-stagger > *{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.reveal.reveal-stagger.visible > *{opacity:1;transform:translateY(0);}
+.reveal.reveal-stagger.visible > *:nth-child(1){transition-delay:.05s;}
+.reveal.reveal-stagger.visible > *:nth-child(2){transition-delay:.1s;}
+.reveal.reveal-stagger.visible > *:nth-child(3){transition-delay:.15s;}
+.reveal.reveal-stagger.visible > *:nth-child(4){transition-delay:.2s;}
+.reveal.reveal-stagger.visible > *:nth-child(5){transition-delay:.25s;}
+.reveal.reveal-stagger.visible > *:nth-child(6){transition-delay:.3s;}
+.reveal.reveal-stagger.visible > *:nth-child(7){transition-delay:.35s;}
+.reveal.reveal-stagger.visible > *:nth-child(8){transition-delay:.4s;}
+.reveal.reveal-stagger.visible > *:nth-child(9){transition-delay:.45s;}
+.reveal.reveal-stagger.visible > *:nth-child(10){transition-delay:.5s;}
+.reveal.reveal-stagger.visible > *:nth-child(11){transition-delay:.55s;}
+.reveal.reveal-stagger.visible > *:nth-child(12){transition-delay:.6s;}
+.reveal.reveal-stagger.visible > *:nth-child(13){transition-delay:.65s;}
+.reveal.reveal-stagger.visible > *:nth-child(14){transition-delay:.7s;}
+.reveal.reveal-stagger.visible > *:nth-child(15){transition-delay:.75s;}
+.reveal.reveal-stagger.visible > *:nth-child(16){transition-delay:.8s;}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  nav,.hero::after,.hero-bg,.hero-grid,.dubai-skyline,.dubai-float-card,.stat-card,.trust-dot,.calc-card.reveal.visible{animation:none!important;}
+  .reveal,.reveal.reveal-stagger > *{opacity:1!important;transform:none!important;transition:none!important;}
+  .mobile-menu a{transition:none!important;}
+}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .steps-grid{grid-template-columns:repeat(2,1fr);}
+  .prop-grid{grid-template-columns:repeat(2,1fr);}
+  .testi-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .hero-content{max-width:100%;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .dubai-grid,.invest-grid{grid-template-columns:1fr;}
+  .dubai-float-card{position:static;margin-top:1rem;}
+  .steps-grid,.prop-grid,.testi-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center;}
+  .hero-stats{gap:1rem;}
+  .stat-card{flex:1;min-width:120px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="logo">Homeway<span> Mortgages</span></a>
+  <ul class="nav-links">
+    <li><a href="#dubai">Dubai</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Started</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="close-menu" onclick="toggleMenu()">×</span>
+  <a href="#dubai" onclick="toggleMenu()">Dubai Properties</a>
+  <a href="#how-it-works" onclick="toggleMenu()">How It Works</a>
+  <a href="#properties" onclick="toggleMenu()">Properties</a>
+  <a href="#calculator" onclick="toggleMenu()">Calculator</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:var(--gold2)">Get Started →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🇦🇪 &nbsp;Now Serving International Investors</div>
+    <h1>Own a Piece of <em>Dubai.</em><br>Let it Pay for Itself.</h1>
+    <p>Invest in Dubai's premium real estate with as little as 20% down payment. We finance the rest — your property earns rental income that covers your monthly installments.</p>
+    <div class="hero-btns">
+      <a href="#calculator" class="btn-primary">Calculate My Investment</a>
+      <a href="#how-it-works" class="btn-outline">How It Works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">8%+</div>
+        <div class="stat-label">Avg Rental Yield</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">20%</div>
+        <div class="stat-label">Down Payment</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">0%</div>
+        <div class="stat-label">Property Tax</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Countries Served</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner reveal reveal-stagger">
+    <div class="trust-item"><div class="trust-dot"></div>RERA Licensed Broker</div>
+    <div class="trust-item"><div class="trust-dot"></div>₹500 Cr+ Mortgages Processed</div>
+    <div class="trust-item"><div class="trust-dot"></div>1,200+ Happy Investors</div>
+    <div class="trust-item"><div class="trust-dot"></div>UK & UAE Regulated</div>
+    <div class="trust-item"><div class="trust-dot"></div>15 Years of Experience</div>
+  </div>
+</div>
+
+<!-- DUBAI SECTION -->
+<section class="section" id="dubai">
+  <div class="dubai-grid">
+    <div class="reveal">
+      <span class="section-label">Why Dubai?</span>
+      <h2 class="section-title">The World's Smartest<br><em>Real Estate Market</em></h2>
+      <p class="section-body">Dubai offers what no other market can — zero property tax, guaranteed rental demand from 3.5 million expats, world-class infrastructure, and average rental yields of 6–10% annually. Your investment doesn't just grow, it pays for itself.</p>
+      <br/><br/>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;">
+        <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:.75rem;padding:1.2rem;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold2);font-weight:600;">AED 1.3T</div>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem;">2023 Property Sales Volume</div>
+        </div>
+        <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:.75rem;padding:1.2rem;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold2);font-weight:600;">+17%</div>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem;">YoY Price Growth</div>
+        </div>
+        <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:.75rem;padding:1.2rem;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold2);font-weight:600;">3.5M+</div>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem;">Expat Population Driving Demand</div>
+        </div>
+        <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:.75rem;padding:1.2rem;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold2);font-weight:600;">0%</div>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem;">Capital Gains Tax</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="padding:1rem 0 1rem 1rem;">
+      <div class="dubai-skyline">
+        <!-- Dubai skyline SVG -->
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0a1628"/>
+              <stop offset="100%" stop-color="#0d1c35"/>
+            </linearGradient>
+            <linearGradient id="bldGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1a2f50"/>
+              <stop offset="100%" stop-color="#0f1e38"/>
+            </linearGradient>
+          </defs>
+          <!-- Sky -->
+          <rect width="600" height="400" fill="url(#skyGrad)"/>
+          <!-- Stars -->
+          <circle cx="50" cy="30" r="1" fill="rgba(255,255,255,0.6)"/>
+          <circle cx="120" cy="20" r="1" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="200" cy="40" r="1.5" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="320" cy="15" r="1" fill="rgba(255,255,255,0.7)"/>
+          <circle cx="450" cy="25" r="1" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="520" cy="10" r="1.5" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="570" cy="35" r="1" fill="rgba(255,255,255,0.6)"/>
+          <!-- Moon glow -->
+          <circle cx="500" cy="60" r="25" fill="rgba(201,168,76,0.08)"/>
+          <circle cx="500" cy="60" r="16" fill="rgba(201,168,76,0.12)"/>
+          <circle cx="500" cy="60" r="10" fill="rgba(201,168,76,0.2)"/>
+          <!-- Buildings -->
+          <!-- Burj Khalifa inspired -->
+          <rect x="275" y="60" width="18" height="280" fill="url(#bldGrad)" rx="1"/>
+          <rect x="268" y="120" width="32" height="220" fill="url(#bldGrad)"/>
+          <rect x="258" y="180" width="52" height="160" fill="url(#bldGrad)"/>
+          <rect x="248" y="230" width="72" height="110" fill="url(#bldGrad)"/>
+          <!-- Building windows -->
+          <rect x="279" y="80" width="4" height="3" fill="rgba(201,168,76,0.4)"/>
+          <rect x="279" y="90" width="4" height="3" fill="rgba(201,168,76,0.3)"/>
+          <rect x="279" y="100" width="4" height="3" fill="rgba(201,168,76,0.5)"/>
+          <rect x="279" y="110" width="4" height="3" fill="rgba(201,168,76,0.2)"/>
+          <!-- Left buildings -->
+          <rect x="80" y="200" width="60" height="140" fill="url(#bldGrad)"/>
+          <rect x="90" y="180" width="40" height="160" fill="#132035"/>
+          <rect x="150" y="220" width="50" height="120" fill="url(#bldGrad)"/>
+          <rect x="155" y="200" width="40" height="140" fill="#132035"/>
+          <rect x="200" y="200" width="40" height="140" fill="url(#bldGrad)"/>
+          <rect x="30" y="240" width="50" height="100" fill="url(#bldGrad)"/>
+          <rect x="10" y="260" width="35" height="80" fill="#132035"/>
+          <!-- Right buildings -->
+          <rect x="330" y="210" width="50" height="130" fill="url(#bldGrad)"/>
+          <rect x="380" y="190" width="55" height="150" fill="#132035"/>
+          <rect x="385" y="170" width="45" height="170" fill="url(#bldGrad)"/>
+          <rect x="440" y="220" width="60" height="120" fill="#132035"/>
+          <rect x="500" y="230" width="50" height="110" fill="url(#bldGrad)"/>
+          <rect x="545" y="240" width="45" height="100" fill="#132035"/>
+          <!-- Crane -->
+          <line x1="460" y1="160" x2="460" y2="220" stroke="rgba(201,168,76,0.2)" stroke-width="2"/>
+          <line x1="430" y1="165" x2="490" y2="165" stroke="rgba(201,168,76,0.2)" stroke-width="1.5"/>
+          <!-- Windows (right buildings) -->
+          <rect x="385" y="180" width="6" height="4" fill="rgba(201,168,76,0.3)"/>
+          <rect x="395" y="180" width="6" height="4" fill="rgba(201,168,76,0.2)"/>
+          <rect x="385" y="190" width="6" height="4" fill="rgba(201,168,76,0.4)"/>
+          <rect x="395" y="192" width="6" height="4" fill="rgba(255,255,255,0.15)"/>
+          <!-- Water reflection -->
+          <rect x="0" y="340" width="600" height="60" fill="rgba(10,22,40,0.7)"/>
+          <ellipse cx="284" cy="345" rx="10" ry="4" fill="rgba(201,168,76,0.15)"/>
+          <!-- Ground -->
+          <rect x="0" y="338" width="600" height="4" fill="rgba(201,168,76,0.08)"/>
+          <!-- Light beams -->
+          <line x1="284" y1="60" x2="284" y2="340" stroke="rgba(201,168,76,0.04)" stroke-width="1"/>
+          <!-- Text overlay -->
+          <text x="300" y="375" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="14" fill="rgba(201,168,76,0.6)" letter-spacing="3">DUBAI</text>
+        </svg>
+      </div>
+      <div class="dubai-float-card">
+        <div class="float-icon">🏙️</div>
+        <div class="float-title">Avg Monthly Rent</div>
+        <div class="float-val">AED 7,500</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-bg" id="how-it-works">
+  <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
+    <span class="section-label">The Process</span>
+    <h2 class="section-title">How <em>Self-Paying</em><br>Property Works</h2>
+    <p style="color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.8;">You invest a down payment. We arrange your mortgage. The property generates rental income. That income covers your monthly installments. You build equity while your tenant pays your loan.</p>
+  </div>
+  <div class="steps-grid reveal reveal-stagger">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-icon">🎯</div>
+      <div class="step-title">Choose Your Property</div>
+      <div class="step-desc">Browse pre-vetted Dubai properties with high rental demand. Our experts help you select based on yield, location, and budget.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-icon">💰</div>
+      <div class="step-title">Pay Down Payment</div>
+      <div class="step-desc">Invest as little as 20–25% of the property value. We handle the entire mortgage application and UAE bank liaison for you.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-icon">🏠</div>
+      <div class="step-title">Property Goes on Rent</div>
+      <div class="step-desc">Your property is listed with top Dubai property managers. High occupancy rates ensure consistent rental income from day one.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-icon">✅</div>
+      <div class="step-title">Rent Covers EMI</div>
+      <div class="step-desc">Monthly rent collected flows directly toward your mortgage installment. In most cases, rental yield exceeds the EMI — you profit monthly.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INVEST MODEL + CALCULATOR -->
+<section class="section" id="calculator">
+  <div class="invest-grid">
+    <div class="reveal">
+      <span class="section-label">Investment Model</span>
+      <h2 class="section-title">Your Property<br><em>Pays for Itself</em></h2>
+      <div class="invest-feature">
+        <div class="invest-icon">🌍</div>
+        <div>
+          <h3>Open to All Nationalities</h3>
+          <p>Indians, Pakistanis, UK citizens, Europeans, Americans — anyone can buy property in Dubai's freehold zones. No residency required.</p>
+        </div>
+      </div>
+      <div class="invest-feature">
+        <div class="invest-icon">📋</div>
+        <div>
+          <h3>We Handle All Paperwork</h3>
+          <p>From mortgage pre-approval to title deed transfer, our team manages every step across international borders.</p>
+        </div>
+      </div>
+      <div class="invest-feature">
+        <div class="invest-icon">💼</div>
+        <div>
+          <h3>Property Management Included</h3>
+          <p>Optional full property management — tenant sourcing, rent collection, maintenance — so you earn passively from anywhere in the world.</p>
+        </div>
+      </div>
+      <div class="invest-feature">
+        <div class="invest-icon">🛡️</div>
+        <div>
+          <h3>RERA-Regulated & Secure</h3>
+          <p>All transactions are protected under Dubai's Real Estate Regulatory Authority framework. Your investment is legally secured.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-card reveal" id="calc-card">
+      <h3>Investment Calculator</h3>
+      <div class="calc-row">
+        <div class="calc-label">Property Price (AED)</div>
+        <input type="number" class="calc-input" id="propPrice" value="1500000" min="500000" step="50000" oninput="calcResult()"/>
+      </div>
+      <div class="calc-row">
+        <div class="calc-label">Down Payment: <span id="dpPct">20</span>%</div>
+        <input type="range" class="range-input" min="20" max="50" value="20" step="1" id="dpRange" oninput="updateDP()"/>
+      </div>
+      <div class="calc-row">
+        <div class="calc-label">Loan Tenure: <span id="tenureVal">20</span> years</div>
+        <input type="range" class="range-input" min="5" max="25" value="20" step="1" id="tenureRange" oninput="updateTenure()"/>
+      </div>
+      <div class="calc-row">
+        <div class="calc-label">Interest Rate: <span id="rateVal">4.5</span>% p.a.</div>
+        <input type="range" class="range-input" min="3" max="7" value="4.5" step="0.1" id="rateRange" oninput="updateRate()"/>
+      </div>
+      <div class="calc-result">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div>
+            <div class="calc-result-label">Monthly EMI</div>
+            <div class="calc-result-val" id="emiVal">AED 5,820</div>
+          </div>
+          <div>
+            <div class="calc-result-label">Est. Monthly Rent</div>
+            <div class="calc-result-val" id="rentVal">AED 7,500</div>
+          </div>
+        </div>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(201,168,76,.15);">
+          <div class="calc-result-label">Monthly Cash Surplus</div>
+          <div class="calc-result-val" id="surplusVal" style="color:#6fcf97;">+AED 1,680</div>
+          <div class="calc-result-sub" id="surplusSub">After EMI, you still earn extra every month</div>
+        </div>
+      </div>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center;margin-top:1.5rem;">Book Free Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROPERTIES -->
+<section class="section" id="properties" style="background:var(--navy2);">
+  <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 1rem;">
+    <span class="section-label">Featured Listings</span>
+    <h2 class="section-title">Prime Dubai <em>Properties</em></h2>
+    <p style="color:rgba(255,255,255,.6);">Pre-vetted properties with verified rental income potential. All include mortgage eligibility clearance.</p>
+  </div>
+  <div class="prop-grid reveal reveal-stagger">
+    <!-- Card 1 -->
+    <div class="prop-card">
+      <div class="prop-img">
+        <div class="prop-img-inner" style="background:linear-gradient(135deg,#1a2f50,#0d1c35);display:flex;align-items:center;justify-content:center;font-size:5rem;">🏙️</div>
+        <div class="prop-tag">High Yield</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-loc">📍 Downtown Dubai</div>
+        <div class="prop-name">Luxury 1-BHK Apartment</div>
+        <div class="prop-specs"><span>🛏 1 Bed</span><span>🚿 1 Bath</span><span>📐 750 sqft</span></div>
+        <div class="prop-price">AED 1,200,000 <span>/ purchase</span></div>
+        <div class="prop-monthly" style="color:var(--gold2);font-weight:500;">Est. Rent: AED 7,000/mo &nbsp;|&nbsp; Yield: 7%</div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="prop-card">
+      <div class="prop-img">
+        <div class="prop-img-inner" style="background:linear-gradient(135deg,#0f2540,#162340);display:flex;align-items:center;justify-content:center;font-size:5rem;">🌊</div>
+        <div class="prop-tag">Sea View</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-loc">📍 Dubai Marina</div>
+        <div class="prop-name">Sea-View 2-BHK Studio</div>
+        <div class="prop-specs"><span>🛏 2 Bed</span><span>🚿 2 Bath</span><span>📐 1,100 sqft</span></div>
+        <div class="prop-price">AED 1,850,000 <span>/ purchase</span></div>
+        <div class="prop-monthly" style="color:var(--gold2);font-weight:500;">Est. Rent: AED 11,000/mo &nbsp;|&nbsp; Yield: 7.1%</div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="prop-card">
+      <div class="prop-img">
+        <div class="prop-img-inner" style="background:linear-gradient(135deg,#1f3040,#0a1628);display:flex;align-items:center;justify-content:center;font-size:5rem;">✈️</div>
+        <div class="prop-tag">Best ROI</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-loc">📍 Jumeirah Village Circle</div>
+        <div class="prop-name">Smart Studio Apartment</div>
+        <div class="prop-specs"><span>🛏 Studio</span><span>🚿 1 Bath</span><span>📐 480 sqft</span></div>
+        <div class="prop-price">AED 580,000 <span>/ purchase</span></div>
+        <div class="prop-monthly" style="color:var(--gold2);font-weight:500;">Est. Rent: AED 4,500/mo &nbsp;|&nbsp; Yield: 9.3%</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem;"><a href="#contact" class="btn-outline">View All 120+ Properties →</a></div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi-bg">
+  <div class="reveal" style="text-align:center;max-width:500px;margin:0 auto 1rem;">
+    <span class="section-label">Investor Stories</span>
+    <h2 class="section-title">Real Investors,<br><em>Real Returns</em></h2>
+  </div>
+  <div class="testi-grid reveal reveal-stagger">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"I invested from India — never visited Dubai once. Homeway handled everything. My property in JVC has been rented since month 2 and the rent covers my entire EMI."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">RS</div>
+        <div>
+          <div class="testi-name">Rajesh Sharma</div>
+          <div class="testi-country">🇮🇳 Mumbai, India</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"As a UK-based Pakistani, I was sceptical. But their team was transparent, fast, and professional. Got mortgage approval in 3 weeks. Best investment decision of my life."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">AK</div>
+        <div>
+          <div class="testi-name">Asim Khan</div>
+          <div class="testi-country">🇬🇧 London, UK</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"We bought 2 apartments in Dubai Marina. Combined rental income is AED 22,000/month. Our combined EMI is AED 16,000. We net AED 6,000 profit every single month."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">MH</div>
+        <div>
+          <div class="testi-name">Mohammed Hassan</div>
+          <div class="testi-country">🇦🇪 Dubai, UAE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTRIES -->
+<section class="section" style="background:var(--navy);text-align:center;padding:4rem 5%;">
+  <div class="reveal">
+    <span class="section-label">Global Reach</span>
+    <h2 class="section-title">We Serve Investors<br><em>Worldwide</em></h2>
+    <p style="color:rgba(255,255,255,.6);margin:0 auto 2rem;max-width:500px;">No matter where you live, you can own Dubai real estate. We have local representatives and legal partners in 50+ countries.</p>
+  </div>
+    <div class="countries-grid reveal reveal-stagger">
+      <div class="country-pill"><span class="country-flag">🇮🇳</span> India</div>
+      <div class="country-pill"><span class="country-flag">🇵🇰</span> Pakistan</div>
+      <div class="country-pill"><span class="country-flag">🇬🇧</span> United Kingdom</div>
+      <div class="country-pill"><span class="country-flag">🇺🇸</span> United States</div>
+      <div class="country-pill"><span class="country-flag">🇨🇦</span> Canada</div>
+      <div class="country-pill"><span class="country-flag">🇦🇺</span> Australia</div>
+      <div class="country-pill"><span class="country-flag">🇩🇪</span> Germany</div>
+      <div class="country-pill"><span class="country-flag">🇫🇷</span> France</div>
+      <div class="country-pill"><span class="country-flag">🇸🇦</span> Saudi Arabia</div>
+      <div class="country-pill"><span class="country-flag">🇧🇩</span> Bangladesh</div>
+      <div class="country-pill"><span class="country-flag">🇳🇬</span> Nigeria</div>
+      <div class="country-pill"><span class="country-flag">🇿🇦</span> South Africa</div>
+      <div class="country-pill"><span class="country-flag">🌍</span> + 40 More</div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section how-bg" id="faq">
+  <div class="reveal" style="text-align:center;max-width:500px;margin:0 auto 1rem;">
+    <span class="section-label">FAQ</span>
+    <h2 class="section-title">Common <em>Questions</em></h2>
+  </div>
+  <div class="faq-list reveal reveal-stagger">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I buy Dubai property without living there? <span class="faq-icon">+</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Yes, absolutely. Dubai's freehold zones allow full foreign ownership. You do not need a UAE visa or residency to purchase property. We handle all paperwork remotely.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How much down payment do I need? <span class="faq-icon">+</span></div>
+      <div class="faq-a"><div class="faq-a-inner">For non-residents, the minimum down payment is 20% for properties up to AED 5 million. This is a one-time payment. For properties above AED 5M, it's 30%. We help you explore off-plan options with even lower entry points.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Will the rental income actually cover my EMI? <span class="faq-icon">+</span></div>
+      <div class="faq-a"><div class="faq-a-inner">In most cases, yes. Dubai's average rental yield is 6–10% annually, while mortgage rates typically result in an EMI equivalent to 5–7% of property value. We only recommend properties where rent covers or exceeds the EMI. Use our calculator to see your numbers.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What documents do I need as an international buyer? <span class="faq-icon">+</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Typically: valid passport, 6 months bank statements, proof of income/salary (or business ownership documents), and a UAE bank account (we help you open one). The exact requirements vary by bank and nationality.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do I get a Dubai visa with property purchase? <span class="faq-icon">+</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Yes! Purchasing a property worth AED 750,000+ qualifies you for a 2-year investor visa. Properties worth AED 2M+ qualify for a 10-year Golden Visa. This is a major benefit for global investors.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What are the costs beyond the purchase price? <span class="faq-icon">+</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Dubai Land Department fee (4%), Dubai Mortgage Registration (0.25% of loan), property valuation fee (~AED 2,500), and agent commission (2%). There's NO annual property tax, no capital gains tax, and no income tax on rental income.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div style="position:relative;z-index:2;">
+    <span class="section-label">Start Today</span>
+    <h2 class="section-title reveal">Ready to Let Dubai<br><em>Pay Your Mortgage?</em></h2>
+    <p class="reveal">Book a free 30-minute consultation with our Dubai property specialists. No commitment, no pressure — just clarity.</p>
+    <div class="cta-btns reveal">
+      <a href="tel:+441234567890" class="btn-primary">📞 Book Free Call</a>
+      <a href="https://wa.me/971508398800" class="btn-outline">💬 WhatsApp Us</a>
+    </div>
+    <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.5rem;padding:.6rem 1.2rem;font-size:.8rem;color:rgba(255,255,255,.6);">✅ Free consultation</div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.5rem;padding:.6rem 1.2rem;font-size:.8rem;color:rgba(255,255,255,.6);">✅ No hidden fees</div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.5rem;padding:.6rem 1.2rem;font-size:.8rem;color:rgba(255,255,255,.6);">✅ RERA licensed</div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.5rem;padding:.6rem 1.2rem;font-size:.8rem;color:rgba(255,255,255,.6);">✅ 15+ years experience</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Homeway Mortgages</div>
+      <div class="footer-tagline">Your global mortgage partner. Specialising in Dubai real estate investments for international buyers since 2009.</div>
+      <br/>
+      <div class="footer-rera">🏛️ RERA License #12345 &nbsp;|&nbsp; FCA Regulated</div>
+    </div>
+    <div>
+      <div class="footer-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Dubai Mortgages</a></li>
+        <li><a href="#">UK Mortgages</a></li>
+        <li><a href="#">Remortgaging</a></li>
+        <li><a href="#">Buy to Let</a></li>
+        <li><a href="#">Property Management</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#">🇬🇧 London Office</a></li>
+        <li><a href="#">🇦🇪 Dubai Office</a></li>
+        <li><a href="mailto:info@homewaymortgages.com">Email Us</a></li>
+        <li><a href="https://wa.me/971508398800">WhatsApp</a></li>
+        <li><a href="#">Book a Call</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2024 Homeway Mortgages Ltd. All rights reserved.</div>
+    <div style="display:flex;gap:1.5rem;">
+      <a href="#" style="color:var(--muted);text-decoration:none;">Privacy</a>
+      <a href="#" style="color:var(--muted);text-decoration:none;">Terms</a>
+      <a href="#" style="color:var(--muted);text-decoration:none;">Complaints</a>
+    </div>
+    <div>Your home/property may be repossessed if you do not keep up repayments on your mortgage.</div>
+  </div>
+</footer>
+<a id="wa-fab" href="https://wa.me/971508398800" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<script>
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// MOBILE MENU
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// FAQ
+function toggleFaq(el){
+  const item=el.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+// SCROLL REVEAL (smooth entrance + staggered children)
+const revealObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+},{threshold:.08,rootMargin:'0px 0px -5% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+let _calcPulseTimer;
+function pulseCalcOutputs(){
+  clearTimeout(_calcPulseTimer);
+  _calcPulseTimer=setTimeout(()=>{
+    if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    ['emiVal','rentVal','surplusVal'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(!el)return;
+      el.classList.remove('calc-updated-pulse');
+      void el.offsetWidth;
+      el.classList.add('calc-updated-pulse');
+    });
+  },120);
+}
+
+// CALCULATOR
+function calcResult(){
+  const price=parseFloat(document.getElementById('propPrice').value)||1500000;
+  const dpPct=parseFloat(document.getElementById('dpRange').value)||20;
+  const tenure=parseFloat(document.getElementById('tenureRange').value)||20;
+  const rate=parseFloat(document.getElementById('rateRange').value)||4.5;
+
+  const loan=price*(1-dpPct/100);
+  const r=rate/100/12;
+  const n=tenure*12;
+  const emi=r===0?loan/n:loan*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  const rent=price*0.065/12;
+  const surplus=rent-emi;
+
+  document.getElementById('emiVal').textContent='AED '+Math.round(emi).toLocaleString();
+  document.getElementById('rentVal').textContent='AED '+Math.round(rent).toLocaleString();
+
+  const surplusEl=document.getElementById('surplusVal');
+  const surplusSubEl=document.getElementById('surplusSub');
+  if(surplus>=0){
+    surplusEl.textContent='+AED '+Math.round(surplus).toLocaleString();
+    surplusEl.style.color='#6fcf97';
+    surplusSubEl.textContent='After EMI, you still earn extra every month';
+  }else{
+    surplusEl.textContent='-AED '+Math.round(Math.abs(surplus)).toLocaleString();
+    surplusEl.style.color='#eb5757';
+    surplusSubEl.textContent='Shortfall — consider a higher down payment';
+  }
+  window._calcRunCount=(window._calcRunCount||0)+1;
+  if(window._calcRunCount>1)pulseCalcOutputs();
+}
+function updateDP(){
+  document.getElementById('dpPct').textContent=document.getElementById('dpRange').value;
+  calcResult();
+}
+function updateTenure(){
+  document.getElementById('tenureVal').textContent=document.getElementById('tenureRange').value;
+  calcResult();
+}
+function updateRate(){
+  document.getElementById('rateVal').textContent=parseFloat(document.getElementById('rateRange').value).toFixed(1);
+  calcResult();
+}
+calcResult();
+</script>
+</body>
+</html>
